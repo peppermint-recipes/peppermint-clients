@@ -12,7 +12,7 @@
   "main": "src/export.js",
   "dependencies": {
     "@capacitor/android": "2.4.7",
-    "@capacitor/cli": "^2.4.7",
+    "@capacitor/cli": "^3.3.1",
     "@capacitor/core": "^2.4.7",
     "@capacitor/ios": "2.4.7",
     "@mdi/font": "^5.0.45",
