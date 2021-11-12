@@ -3,9 +3,6 @@
 import LocalStore from '@/Stores/LocalStore';
 import WebStore from '@/Stores/WebStore';
 import { Storable } from '@/types/Storable';
-import { Capacitor } from '@capacitor/core';
-
-const plattformIsNative = Capacitor?.isNative;
 
 export default class StoreHandler<Type extends Storable> {
   private localStore: LocalStore<Type>;
@@ -14,13 +11,17 @@ export default class StoreHandler<Type extends Storable> {
 
   private items: Type[];
 
+  private plattformIsMobile: boolean
+
   constructor(options: {
     localStore: LocalStore<Type>,
     webStore: WebStore<Type>,
+    plattformIsMobile: boolean
   }) {
     this.localStore = options.localStore;
     this.webStore = options.webStore;
     this.items = [];
+    this.plattformIsMobile = options.plattformIsMobile;
   }
 
   async add(item: Type) {
@@ -35,7 +36,7 @@ export default class StoreHandler<Type extends Storable> {
       console.log(error);
     }
 
-    if (plattformIsNative) {
+    if (this.plattformIsMobile) {
       if (!itemFromServer) {
         this.items.push(item);
       }
@@ -64,7 +65,7 @@ export default class StoreHandler<Type extends Storable> {
       console.log(error);
     }
 
-    if (plattformIsNative) {
+    if (this.plattformIsMobile) {
       if (!updatedItemFromServer) {
         this.items.push(item);
       }
@@ -93,13 +94,13 @@ export default class StoreHandler<Type extends Storable> {
 
     this.items.push(itemToDelete);
 
-    if (plattformIsNative) {
+    if (this.plattformIsMobile) {
       this.localStore.persist(this.items);
     }
   }
 
   public async sync() {
-    if (!plattformIsNative) {
+    if (!this.plattformIsMobile) {
       this.items = await this.webStore.get();
       return;
     }

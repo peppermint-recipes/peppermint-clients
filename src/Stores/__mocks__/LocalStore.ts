@@ -1,10 +1,7 @@
-import {
-  FilesystemDirectory, FilesystemEncoding, Plugins,
-} from '@capacitor/core';
+import { FilesystemDirectory, FilesystemEncoding } from '@capacitor/core';
+import Filesystem from '../../__mocks__/@capacitor/Filesystem';
 
-const { Filesystem } = Plugins;
-
-export default class localStore<Type> {
+class LocalStore<Type> {
   private fileName: string
 
   constructor(fileNameIn: string) {
@@ -54,3 +51,5 @@ export default class localStore<Type> {
     });
   }
 }
+
+export default LocalStore;

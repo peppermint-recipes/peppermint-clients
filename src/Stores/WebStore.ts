@@ -1,17 +1,19 @@
 import { AxiosInstance } from 'axios';
 
+type client = Pick<AxiosInstance, 'post' | 'delete' | 'get' | 'put' >
+
 export default class WebStore<Type> {
   private baseUrl: string
 
-  private apiClient: AxiosInstance
+  private apiClient: client
 
-  constructor(readonly baseUrlIn: string, readonly apiClientIn: AxiosInstance) {
+  constructor(readonly baseUrlIn: string, readonly apiClientIn: client) {
     this.baseUrl = baseUrlIn;
     this.apiClient = apiClientIn;
   }
 
   public async saveOne(data: Type) {
-    const response = await this.apiClient.post(this.baseUrl, data);
+    const response = await this.apiClient.post<Type>(this.baseUrl, data);
     if (response.data === null) {
       return [];
     }

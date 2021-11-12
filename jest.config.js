@@ -4,4 +4,5 @@ module.exports = {
   moduleDirectories: [
     'node_modules',
   ],
+  roots: ['/src/'],
 };
