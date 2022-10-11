@@ -1,6 +1,9 @@
 # app
 
 ## Project setup
+
+**This project is not actively maintained.**
+
 ```
 yarn install
 ```
@@ -13,7 +16,7 @@ npx cap sync
 
 Have the app not use a development server, just remove the `server` object from the configuration and execute the following commands:
 ```
-npx cap copy 
+npx cap copy
 npx cap sync
 ```
 
@@ -28,7 +31,7 @@ yarn serve
 yarn build
 
 # Copy files into application
-npx cap copy 
+npx cap copy
 npx cap sync
 ```
 
